@@ -1,0 +1,386 @@
+/* Voting Page Styles */
+
+.voting.page {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.page-header h1 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Voting Power Card */
+.voting-power-card {
+  margin-bottom: 2rem;
+}
+
+.voting-power-content {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.voting-power-icon {
+  font-size: 3rem;
+  color: var(--primary-purple);
+  background: linear-gradient(135deg, var(--primary-purple), var(--primary-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.voting-power-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.voting-power-stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 1rem;
+}
+
+.voting-power-stats .stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.voting-power-stats .stat-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.voting-power-stats .stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-green);
+}
+
+.voting-power-stats .stat-value.connected {
+  color: var(--primary-green);
+}
+
+.voting-power-stats .stat-value.disconnected {
+  color: var(--status-danger);
+}
+
+.voting-power-warning {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: var(--status-warning);
+  color: var(--background-dark);
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* Voting Controls */
+.voting-controls {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.filter-group,
+.sort-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filter-group label,
+.sort-group label {
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.sort-select {
+  padding: 0.5rem 1rem;
+  background: var(--background-card);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sort-select:hover {
+  border-color: var(--primary-purple);
+}
+
+.sort-select:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(0, 255, 148, 0.1);
+}
+
+/* Proposals Voting List */
+.proposals-voting-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.proposal-voting-card {
+  padding: 1.5rem;
+}
+
+/* Proposal Header */
+.proposal-voting-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 2rem;
+}
+
+.proposal-voting-title h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.proposal-voting-title h3 a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.proposal-voting-title h3 a:hover {
+  color: var(--primary-green);
+}
+
+.proposal-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.proposal-id,
+.proposal-sector,
+.proposal-status {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.proposal-sector {
+  padding: 0.25rem 0.75rem;
+  background: var(--background-darker);
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.proposal-voting-amount {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+}
+
+.amount-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.amount-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-green);
+}
+
+/* Description */
+.proposal-voting-description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* AI Score */
+.proposal-ai-score {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ai-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.ai-score-bar {
+  flex: 1;
+  height: 8px;
+  background: var(--background-darker);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ai-score-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.ai-score-value {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  white-space: nowrap;
+}
+
+/* Voting Results */
+.voting-results {
+  margin-bottom: 1.5rem;
+}
+
+.voting-bar {
+  display: flex;
+  height: 12px;
+  background: var(--background-darker);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.voting-bar-for {
+  background: linear-gradient(90deg, var(--primary-green), var(--primary-cyan));
+  transition: width 0.5s ease;
+}
+
+.voting-bar-against {
+  background: linear-gradient(90deg, var(--status-danger), var(--primary-orange));
+  transition: width 0.5s ease;
+}
+
+.voting-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.voting-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.voting-stat.for {
+  color: var(--primary-green);
+}
+
+.voting-stat.against {
+  color: var(--status-danger);
+}
+
+/* Actions */
+.proposal-voting-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.empty-state h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.empty-state p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+/* Loading Skeleton */
+.loading-skeleton {
+  padding: 3rem;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .voting.page {
+    padding: 1rem;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+  }
+
+  .voting-power-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .voting-power-stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .voting-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .filter-group,
+  .sort-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .filter-buttons {
+    flex-wrap: wrap;
+  }
+
+  .proposal-voting-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .proposal-voting-amount {
+    align-items: flex-start;
+  }
+
+  .proposal-voting-actions {
+    flex-direction: column;
+  }
+
+  .proposal-voting-actions button,
+  .proposal-voting-actions a {
+    width: 100%;
+  }
+
+  .voting-stats {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

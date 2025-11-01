@@ -1,0 +1,43 @@
+{
+  "name": "aptocom-ai",
+  "version": "1.0.0",
+  "description": "AI-powered backend API for AptoCom autonomous DAO on Aptos blockchain",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "node src/utils/testEnvironment.js",
+    "test:health": "node -e \"require('./src/utils/healthCheck').performHealthCheck(true).then(r => console.log(JSON.stringify(r, null, 2)))\"",
+    "health": "node src/utils/testEnvironment.js"
+  },
+  "keywords": [
+    "aptos",
+    "blockchain",
+    "dao",
+    "ai",
+    "web3",
+    "defi"
+  ],
+  "author": "AptoCom Team",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@aptos-labs/ts-sdk": "^5.1.1",
+    "axios": "^1.13.1",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "groq-sdk": "^0.34.0",
+    "ipfs-http-client": "^60.0.1",
+    "mongodb": "^6.20.0",
+    "mongoose": "^8.19.2",
+    "multer": "^2.0.2",
+    "nft.storage": "^7.2.0"
+  },
+  "devDependencies": {
+    "@jest/globals": "^30.2.0",
+    "jest": "^30.2.0",
+    "supertest": "^7.1.4"
+  }
+}

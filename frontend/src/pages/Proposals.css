@@ -1,0 +1,7 @@
+/* Minimal styles for Proposals page */
+.page-header h1 { margin:0; }
+.proposals-actions { display:flex; gap:1rem; margin:1rem 0; }
+.proposals-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:1rem; }
+.proposal-meta { display:flex; justify-content:space-between; gap:1rem; align-items:center; margin-top:1rem; }
+.muted { color:var(--text-muted); }
+.error { color: #ff6b6b; }

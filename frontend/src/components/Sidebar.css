@@ -1,0 +1,114 @@
+/* ============================================
+   SIDEBAR COMPONENT STYLES
+   ============================================ */
+
+.sidebar {
+  width: 260px;
+  background-color: var(--bg-dark);
+  border-right: 1px solid var(--border-color);
+  position: fixed;
+  left: 0;
+  top: 70px; /* Navbar height */
+  bottom: 0;
+  transition: transform var(--transition-normal);
+  z-index: var(--z-fixed);
+  overflow-y: auto;
+  padding: var(--spacing-lg) 0;
+}
+
+.sidebar-open {
+  transform: translateX(0);
+}
+
+.sidebar-closed {
+  transform: translateX(-100%);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  border-left: 3px solid transparent;
+  position: relative;
+}
+
+.sidebar-item:hover {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border-left-color: var(--primary-purple);
+}
+
+.sidebar-item-active {
+  background-color: rgba(108, 72, 255, 0.1);
+  color: var(--primary-green);
+  border-left-color: var(--primary-green);
+  font-weight: 600;
+}
+
+.sidebar-item-active::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 24px;
+  background-color: var(--primary-green);
+  border-radius: 2px 0 0 2px;
+}
+
+.sidebar-icon {
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+}
+
+.sidebar-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== SCROLLBAR ===== */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: var(--bg-darker);
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--primary-purple);
+  border-radius: 3px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .sidebar {
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .sidebar-closed {
+    transform: translateX(-100%);
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 240px;
+  }
+}

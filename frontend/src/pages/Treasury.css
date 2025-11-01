@@ -1,0 +1,176 @@
+.treasury {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.treasury-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 1rem;
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+  background: linear-gradient(135deg, var(--primary-purple), var(--primary-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-label {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.treasury-actions {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.dividend-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.dividend-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0.5rem;
+}
+
+.dividend-item .label {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.dividend-item .value {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.claimable-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: rgba(0, 255, 148, 0.05);
+  border: 2px solid var(--primary-green);
+  border-radius: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.claimable-amount {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.claimable-amount span {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.connect-message {
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+
+.allocation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.allocation-form label {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.allocation-form input {
+  padding: 0.875rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.allocation-form input:focus {
+  outline: none;
+  border-color: var(--primary-purple);
+  box-shadow: 0 0 0 3px rgba(138, 73, 244, 0.1);
+}
+
+.info-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.info-item {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0.5rem;
+  border-left: 3px solid var(--primary-purple);
+}
+
+.info-item h3 {
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.info-item p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 968px) {
+  .treasury-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .dividend-info {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .treasury-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .info-section {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,16 @@
+[package]
+name = "aptocom"
+version = "1.0.0"
+authors = []
+
+[addresses]
+aptocom = "0x346a0fa67d42e63c5d713914fe46cb4ed38f011d21004122e3784b28437a1f3d"
+
+[dev-addresses]
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "aptos-release-v1.19"
+subdir = "aptos-move/framework/aptos-framework"
+
+[dev-dependencies]

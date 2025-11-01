@@ -1,0 +1,318 @@
+.analytics {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.performance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.performance-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.5rem;
+}
+
+.performance-icon {
+  font-size: 2.5rem;
+  opacity: 0.8;
+}
+
+.performance-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+  position: relative;
+}
+
+.performance-label {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.performance-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.trend {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.trend.up {
+  color: var(--primary-green);
+}
+
+.trend.down {
+  color: var(--status-danger);
+}
+
+.analytics-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.chart-container {
+  margin: 1.5rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.chart-container canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+.chart-legend {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-top: 1rem;
+}
+
+.sector-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.sector-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sector-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sector-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.sector-value {
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.sector-bar-container {
+  height: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.sector-bar {
+  height: 100%;
+  border-radius: 1rem;
+  transition: width 0.5s ease;
+}
+
+.investments-table {
+  margin-top: 1.5rem;
+}
+
+.table-header,
+.table-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  align-items: center;
+}
+
+.table-header {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.table-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background 0.2s ease;
+}
+
+.table-row:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.project-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.sector-tag {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.amount {
+  font-weight: 600;
+  color: var(--primary-cyan);
+}
+
+.roi {
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.roi.positive {
+  color: var(--primary-green);
+}
+
+.status-badge {
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.status-badge.success {
+  background: rgba(0, 255, 148, 0.1);
+  color: var(--primary-green);
+}
+
+.status-badge.active {
+  background: rgba(0, 212, 255, 0.1);
+  color: var(--primary-cyan);
+}
+
+.status-badge.pending {
+  background: rgba(255, 193, 7, 0.1);
+  color: var(--primary-yellow);
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.insights-list {
+  margin: 1rem 0 0;
+  padding-left: 1.5rem;
+  color: var(--text-secondary);
+  line-height: 2;
+}
+
+.insights-list li {
+  margin: 0.75rem 0;
+}
+
+.dao-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.dao-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0.5rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.dao-stat-item:hover {
+  border-color: var(--primary-purple);
+  box-shadow: 0 0 20px rgba(138, 73, 244, 0.2);
+  transform: translateY(-2px);
+}
+
+.dao-stat-item .stat-label {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dao-stat-item .stat-value {
+  font-size: 1.875rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-purple), var(--primary-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@media (max-width: 1100px) {
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .table-header,
+  .table-row {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  .sector-tag,
+  .amount {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .performance-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .insights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .table-header,
+  .table-row {
+    grid-template-columns: 2fr 1fr;
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+
+  .roi,
+  .status-badge {
+    display: none;
+  }
+
+  .dao-stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .performance-grid {
+    grid-template-columns: 1fr;
+  }
+}
