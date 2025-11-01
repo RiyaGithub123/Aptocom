@@ -25,6 +25,31 @@
 
 ---
 
+## 📜 Deployed Smart Contracts
+
+All contracts are deployed on **Aptos Testnet** at:
+
+**Contract Address**: `0x346a0fa67d42e63c5d713914fe46cb4ed38f011d21004122e3784b28437a1f3d`
+
+### Modules
+
+| Module | Description | Key Functions |
+|--------|-------------|---------------|
+| **`act_token`** | ACT Fungible Asset token | `purchase`, `transfer`, `mint`, `burn`, `balance_of` |
+| **`governance`** | Proposal creation & voting | `create_proposal`, `vote`, `execute_proposal` |
+| **`treasury`** | Fund management & dividends | `deposit`, `withdraw`, `distribute_dividends`, `claim_dividend` |
+
+🔗 **View on Explorer**: [AptoCom Contract](https://explorer.aptoslabs.com/account/0x346a0fa67d42e63c5d713914fe46cb4ed38f011d21004122e3784b28437a1f3d?network=testnet)
+
+### Token Details
+
+- **Token Name**: AptoCom Token
+- **Symbol**: ACT
+- **Decimals**: 8
+- **Type**: Aptos Fungible Asset (FA)
+- **Exchange Rate**: 1 APT = 100 ACT
+
+---
 ## 🏗️ Architecture
 
 ```
@@ -55,31 +80,6 @@
 
 ---
 
-## 📜 Deployed Smart Contracts
-
-All contracts are deployed on **Aptos Testnet** at:
-
-**Contract Address**: `0x346a0fa67d42e63c5d713914fe46cb4ed38f011d21004122e3784b28437a1f3d`
-
-### Modules
-
-| Module | Description | Key Functions |
-|--------|-------------|---------------|
-| **`act_token`** | ACT Fungible Asset token | `purchase`, `transfer`, `mint`, `burn`, `balance_of` |
-| **`governance`** | Proposal creation & voting | `create_proposal`, `vote`, `execute_proposal` |
-| **`treasury`** | Fund management & dividends | `deposit`, `withdraw`, `distribute_dividends`, `claim_dividend` |
-
-🔗 **View on Explorer**: [AptoCom Contract](https://explorer.aptoslabs.com/account/0x346a0fa67d42e63c5d713914fe46cb4ed38f011d21004122e3784b28437a1f3d?network=testnet)
-
-### Token Details
-
-- **Token Name**: AptoCom Token
-- **Symbol**: ACT
-- **Decimals**: 8
-- **Type**: Aptos Fungible Asset (FA)
-- **Exchange Rate**: 1 APT = 100 ACT
-
----
 
 ## 🛠️ Tech Stack
 
