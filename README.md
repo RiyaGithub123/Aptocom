@@ -598,7 +598,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 [⭐ Star this repo](https://github.com/YOUR_USERNAME/aptocom) • [🐛 Report Bug](https://github.com/YOUR_USERNAME/aptocom/issues) • [💡 Request Feature](https://github.com/YOUR_USERNAME/aptocom/issues)
 
-</div>
-#***REMOVED*** ***REMOVED***A***REMOVED***p***REMOVED***t***REMOVED***o***REMOVED***c***REMOVED***o***REMOVED***m***REMOVED***
-***REMOVED***
-***REMOVED***
+
