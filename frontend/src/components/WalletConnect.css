@@ -142,6 +142,11 @@
   margin: 0;
 }
 
+.wallet-status {
+  color: var(--success-green, #10b981) !important;
+  font-weight: 500;
+}
+
 .no-wallets {
   text-align: center;
   padding: 2rem 1rem;

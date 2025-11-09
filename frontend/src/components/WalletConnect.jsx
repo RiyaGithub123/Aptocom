@@ -16,15 +16,43 @@ const WalletConnect = ({ isOpen, onClose }) => {
   const { connect, wallets, connected } = useWallet();
   const [isConnecting, setIsConnecting] = useState(false);
 
+  // Filter to only show wallets that are actually installed
+  const installedWallets = wallets.filter(wallet => {
+    // Check if wallet is actually available in the browser
+    if (wallet.name === 'Petra') {
+      return typeof window !== 'undefined' && window.aptos;
+    }
+    if (wallet.name === 'Martian') {
+      return typeof window !== 'undefined' && window.martian;
+    }
+    // For other wallets, check if readyState is installed
+    return wallet.readyState === 'Installed';
+  });
+
   const handleConnect = async (walletName) => {
     try {
       setIsConnecting(true);
+      
+      // Double check wallet is actually installed before connecting
+      const wallet = installedWallets.find(w => w.name === walletName);
+      if (!wallet) {
+        toast.error(`${walletName} wallet is not installed. Please install it first.`);
+        setIsConnecting(false);
+        return;
+      }
+
       await connect(walletName);
       toast.success(`Connected to ${walletName}`);
       onClose();
     } catch (error) {
       console.error('Error connecting wallet:', error);
-      toast.error(`Failed to connect to ${walletName}. Please try again.`);
+      
+      // Check if error is because wallet is not installed
+      if (error.message && error.message.includes('not installed')) {
+        toast.error(`${walletName} wallet is not installed. Please install the browser extension first.`);
+      } else {
+        toast.error(`Failed to connect to ${walletName}. Please try again.`);
+      }
     } finally {
       setIsConnecting(false);
     }
@@ -51,7 +79,7 @@ const WalletConnect = ({ isOpen, onClose }) => {
           </p>
 
           <div className="wallet-list">
-            {wallets.map((wallet) => (
+            {installedWallets.map((wallet) => (
               <button
                 key={wallet.name}
                 className="wallet-item"
@@ -67,13 +95,13 @@ const WalletConnect = ({ isOpen, onClose }) => {
                 )}
                 <div className="wallet-info">
                   <h3>{wallet.name}</h3>
-                  <p>{wallet.url}</p>
+                  <p className="wallet-status">✓ Installed</p>
                 </div>
               </button>
             ))}
           </div>
 
-          {wallets.length === 0 && (
+          {installedWallets.length === 0 && (
             <div className="no-wallets">
               <p>No Aptos wallets detected.</p>
               <p>Please install Petra or Martian wallet extension.</p>

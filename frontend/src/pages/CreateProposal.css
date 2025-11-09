@@ -101,6 +101,13 @@
   transition: all 0.2s ease;
 }
 
+/* Style select dropdown options */
+.form-group select option {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  padding: 0.5rem;
+}
+
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {

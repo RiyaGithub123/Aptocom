@@ -13,15 +13,17 @@ import { getAPTBalance } from '../services/aptosClient';
 const useUserBalance = (autoFetch = true, refreshInterval = 15000) => {
   const { account, connected } = useWallet();
   const [balances, setBalances] = useState({
-    act: 0,
-    apt: 0,
+    act: null, // Changed from 0 to null to distinguish "not loaded" from "zero balance"
+    apt: null,
   });
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // Start as true to show loading initially
   const [error, setError] = useState(null);
 
   const fetchBalances = useCallback(async () => {
     if (!connected || !account?.address) {
-      setBalances({ act: 0, apt: 0 });
+      console.log('[useUserBalance] Not connected or no account address');
+      setBalances({ act: null, apt: null });
+      setLoading(false);
       return;
     }
 
@@ -29,11 +31,15 @@ const useUserBalance = (autoFetch = true, refreshInterval = 15000) => {
       setLoading(true);
       setError(null);
 
+      console.log('[useUserBalance] Fetching balances for:', account.address);
+
       // Fetch both ACT and APT balances in parallel
       const [actBalance, aptBalance] = await Promise.all([
         getACTBalance(account.address),
         getAPTBalance(account.address),
       ]);
+
+      console.log('[useUserBalance] Fetched balances:', { actBalance, aptBalance });
 
       setBalances({
         act: actBalance,
@@ -42,7 +48,7 @@ const useUserBalance = (autoFetch = true, refreshInterval = 15000) => {
     } catch (err) {
       console.error('Error fetching user balances:', err);
       setError(err.message || 'Failed to fetch balances');
-      setBalances({ act: 0, apt: 0 });
+      setBalances({ act: null, apt: null });
     } finally {
       setLoading(false);
     }

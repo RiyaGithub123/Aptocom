@@ -163,10 +163,10 @@ const CreateProposal = () => {
                 onChange={handleChange}
                 placeholder="Describe the investment opportunity, business model, market analysis, and expected returns..."
                 rows={8}
-                maxLength={2000}
+                maxLength={4000}
                 required
               />
-              <span className="char-count">{formData.description.length}/2000</span>
+              <span className="char-count">{formData.description.length}/4000</span>
             </div>
 
             <div className="form-row">
@@ -215,9 +215,9 @@ const CreateProposal = () => {
                 onChange={handleChange}
                 placeholder="Team background, timeline, milestones, exit strategy..."
                 rows={4}
-                maxLength={1000}
+                maxLength={5000}
               />
-              <span className="char-count">{formData.details.length}/1000</span>
+              <span className="char-count">{formData.details.length}/5000</span>
             </div>
 
             <div className="form-actions">

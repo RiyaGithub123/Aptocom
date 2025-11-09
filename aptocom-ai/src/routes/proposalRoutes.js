@@ -83,6 +83,21 @@ const upload = multer({
 router.post('/create', upload.array('documents', 10), proposalController.createProposal);
 
 /**
+ * POST /api/proposals/preview-evaluate
+ * Evaluate proposal data without saving to database (for real-time feedback during creation)
+ * 
+ * Body:
+ * - title: string (required)
+ * - description: string (required)
+ * - requestedAmount: number (optional)
+ * - sector: string (optional)
+ * 
+ * Response:
+ * - evaluation: object (AI evaluation results including score, recommendation, etc.)
+ */
+router.post('/preview-evaluate', proposalController.previewEvaluate);
+
+/**
  * GET /api/proposals/stats
  * Get aggregate statistics about proposals
  * 

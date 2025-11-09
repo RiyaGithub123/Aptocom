@@ -63,7 +63,7 @@ async function castVote(req, res) {
     }
 
     // Validate Aptos address
-    if (!aptosService.isValidAddress(walletAddress)) {
+    if (!aptosService.isValidAptosAddress(walletAddress)) {
       return res.status(400).json({
         success: false,
         error: 'Invalid Aptos wallet address format',
@@ -307,7 +307,7 @@ async function getUserVotingHistory(req, res) {
     const { page = 1, limit = 20 } = req.query;
 
     // Validate wallet address
-    if (!aptosService.isValidAddress(wallet)) {
+    if (!aptosService.isValidAptosAddress(wallet)) {
       return res.status(400).json({
         success: false,
         error: 'Invalid Aptos wallet address format',

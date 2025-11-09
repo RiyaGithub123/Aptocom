@@ -8,8 +8,9 @@ const express = require('express');
 const router = express.Router();
 const analyticsController = require('../controllers/analyticsController');
 
-// Get dashboard overview
+// Get dashboard overview (supports both /overview and /dashboard paths)
 router.get('/overview', analyticsController.getOverview);
+router.get('/dashboard', analyticsController.getOverview); // Alias for dashboard
 
 // Get proposal metrics
 router.get('/proposals', analyticsController.getProposalMetrics);

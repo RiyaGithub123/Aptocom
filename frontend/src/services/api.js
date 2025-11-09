@@ -46,9 +46,16 @@ export const createProposal = async (proposalData) => {
 };
 
 // Force re-evaluation of a proposal
-export const evaluateProposal = async (id) => {
+export const evaluateProposal = async (proposalData) => {
   try {
-    const response = await apiClient.post(`/proposals/${id}/evaluate`);
+    // If proposalData has an id, evaluate existing proposal
+    if (proposalData.id) {
+      const response = await apiClient.post(`/proposals/${proposalData.id}/evaluate`);
+      return response.data;
+    }
+    
+    // Otherwise, do a preview evaluation with the proposal data
+    const response = await apiClient.post('/proposals/preview-evaluate', proposalData);
     return response.data;
   } catch (error) {
     console.error('Error evaluating proposal:', error);

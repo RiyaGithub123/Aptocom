@@ -96,7 +96,7 @@ async function createProposal(req, res) {
     }
 
     // Validate Aptos address format
-    if (!aptosService.isValidAddress(submitterWallet)) {
+    if (!aptosService.isValidAptosAddress(submitterWallet)) {
       return res.status(400).json({
         success: false,
         error: 'Invalid Aptos wallet address format',
@@ -431,6 +431,53 @@ async function listProposals(req, res) {
       success: false,
       error: 'Failed to list proposals',
       details: error.message,
+    });
+  }
+}
+
+/**
+ * Preview AI Evaluation
+ * POST /api/proposals/preview-evaluate
+ * 
+ * Evaluates proposal data without saving to database
+ * Used for real-time AI feedback during proposal creation
+ */
+async function previewEvaluate(req, res) {
+  try {
+    const { title, description, requestedAmount, sector } = req.body;
+
+    // Validate required fields
+    if (!title || !description) {
+      return res.status(400).json({
+        success: false,
+        error: 'Title and description are required for evaluation',
+      });
+    }
+
+    // Create a temporary proposal object for evaluation
+    const tempProposal = {
+      title,
+      description,
+      requestedAmount: parseFloat(requestedAmount) || 0,
+      sector: sector || 'other',
+    };
+
+    console.log('Evaluating proposal preview:', tempProposal.title);
+
+    // Trigger evaluation with the temporary data
+    const evaluation = await aiService.evaluateProposal(tempProposal);
+
+    return res.status(200).json({
+      success: true,
+      message: 'Preview evaluation completed successfully',
+      data: evaluation,
+    });
+  } catch (error) {
+    console.error('Error in preview evaluation:', error);
+    return res.status(500).json({
+      success: false,
+      error: 'Failed to evaluate proposal preview',
+      message: error.message,
     });
   }
 }
@@ -836,6 +883,7 @@ module.exports = {
   createProposal,
   getProposalById,
   listProposals,
+  previewEvaluate,
   evaluateProposal,
   getEvaluationResults,
   submitToBlockchain,

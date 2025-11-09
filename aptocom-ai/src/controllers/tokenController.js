@@ -29,7 +29,7 @@ async function getBalance(req, res) {
     const { address } = req.params;
 
     // Validate address
-    if (!aptosService.isValidAddress(address)) {
+    if (!aptosService.isValidAptosAddress(address)) {
       return res.status(400).json({
         success: false,
         error: 'Invalid Aptos wallet address format',
@@ -103,14 +103,14 @@ async function mintTokens(req, res) {
     }
 
     // Validate addresses
-    if (!aptosService.isValidAddress(toAddress)) {
+    if (!aptosService.isValidAptosAddress(toAddress)) {
       return res.status(400).json({
         success: false,
         error: 'Invalid recipient address format',
       });
     }
 
-    if (!aptosService.isValidAddress(adminWallet)) {
+    if (!aptosService.isValidAptosAddress(adminWallet)) {
       return res.status(400).json({
         success: false,
         error: 'Invalid admin wallet address format',
@@ -206,14 +206,14 @@ async function transferTokens(req, res) {
     }
 
     // Validate addresses
-    if (!aptosService.isValidAddress(fromAddress)) {
+    if (!aptosService.isValidAptosAddress(fromAddress)) {
       return res.status(400).json({
         success: false,
         error: 'Invalid sender address format',
       });
     }
 
-    if (!aptosService.isValidAddress(toAddress)) {
+    if (!aptosService.isValidAptosAddress(toAddress)) {
       return res.status(400).json({
         success: false,
         error: 'Invalid recipient address format',

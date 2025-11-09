@@ -13,13 +13,25 @@ const GAS_RESERVE = 0.05; // Reserve APT for transaction gas fees
 
 const TokenPurchase = () => {
   const { account, connected } = useWallet();
-  const { actBalance, aptBalance, refetch } = useUserBalance();
+  const { actBalance, aptBalance, loading: balanceLoading, refetch } = useUserBalance();
   const [aptAmount, setAptAmount] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleBuy = async () => {
     if (!connected || !account) {
       toast.error('Please connect your wallet first');
+      return;
+    }
+
+    // Wait for balance to load
+    if (balanceLoading) {
+      toast.info('Please wait while we fetch your balance...');
+      return;
+    }
+
+    // Check if aptBalance is actually loaded
+    if (aptBalance === null || aptBalance === undefined) {
+      toast.error('Unable to fetch your balance. Please refresh and try again.');
       return;
     }
 
@@ -74,7 +86,9 @@ const TokenPurchase = () => {
     return (a * DEFAULT_RATE).toFixed(2);
   };
 
-  const availableForPurchase = aptBalance ? Math.max(0, aptBalance - GAS_RESERVE) : 0;
+  const availableForPurchase = (aptBalance !== null && aptBalance !== undefined) 
+    ? Math.max(0, aptBalance - GAS_RESERVE) 
+    : 0;
 
   return (
     <div className="token-purchase page">
@@ -85,18 +99,65 @@ const TokenPurchase = () => {
         </p>
       </div>
 
+      {balanceLoading && (
+        <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)' }}>
+          <p>Loading your wallet balance...</p>
+        </div>
+      )}
+
+      {!balanceLoading && connected && aptBalance === 0 && (
+        <Card variant="outlined" style={{ marginBottom: '1.5rem', padding: '1.5rem', background: 'rgba(255, 193, 7, 0.1)', borderColor: 'var(--warning-yellow)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <div style={{ fontSize: '2rem' }}>⚠️</div>
+            <div style={{ flex: 1 }}>
+              <h3 style={{ color: 'var(--warning-yellow)', margin: '0 0 0.5rem 0' }}>
+                Your wallet has no APT balance
+              </h3>
+              <p style={{ margin: '0 0 1rem 0', color: 'var(--text-secondary)' }}>
+                You need APT (Aptos tokens) to purchase ACT tokens. Get free testnet APT from the faucet:
+              </p>
+              <a 
+                href="https://faucet.testnet.aptoslabs.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ 
+                  display: 'inline-block',
+                  padding: '0.5rem 1rem',
+                  background: 'var(--warning-yellow)',
+                  color: 'var(--bg-primary)',
+                  borderRadius: 'var(--radius-md)',
+                  textDecoration: 'none',
+                  fontWeight: 600,
+                  transition: 'all 0.2s ease'
+                }}
+                onMouseOver={(e) => e.target.style.transform = 'translateY(-2px)'}
+                onMouseOut={(e) => e.target.style.transform = 'translateY(0)'}
+              >
+                🚰 Get Free Testnet APT
+              </a>
+              <p style={{ marginTop: '1rem', fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+                Your wallet address: <code style={{ background: 'rgba(255,255,255,0.1)', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>{account?.address}</code>
+              </p>
+            </div>
+          </div>
+        </Card>
+      )}
+
       <div className="purchase-container">
         <Card variant="default">
           <div className="purchase-form">
             <div className="balance-info">
               <div className="balance-item">
                 <span className="label">Your APT Balance</span>
-                <span className="value">{aptBalance?.toFixed(4) || '0.0000'}</span>
+                <span className="value" style={{ color: aptBalance === 0 ? 'var(--warning-yellow)' : 'inherit' }}>
+                  {balanceLoading ? '...' : (aptBalance?.toFixed(4) || '0.0000')}
+                  {!balanceLoading && aptBalance === 0 && ' ⚠️'}
+                </span>
               </div>
               <div className="balance-item">
                 <span className="label">Available for Purchase</span>
-                <span className="value" style={{ color: 'var(--primary-green)' }}>
-                  {availableForPurchase.toFixed(4)} APT
+                <span className="value" style={{ color: availableForPurchase > 0 ? 'var(--primary-green)' : 'var(--text-muted)' }}>
+                  {balanceLoading ? '...' : `${availableForPurchase.toFixed(4)} APT`}
                 </span>
                 <span className="hint" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                   ({GAS_RESERVE} APT reserved for gas)
@@ -104,7 +165,9 @@ const TokenPurchase = () => {
               </div>
               <div className="balance-item">
                 <span className="label">Your ACT Balance</span>
-                <span className="value">{actBalance?.toFixed(2) || '0.00'}</span>
+                <span className="value">
+                  {balanceLoading ? '...' : (actBalance?.toFixed(2) || '0.00')}
+                </span>
               </div>
             </div>
 
@@ -138,9 +201,13 @@ const TokenPurchase = () => {
                 size="large" 
                 fullWidth
                 onClick={handleBuy} 
-                disabled={loading || !connected || !aptAmount || parseFloat(aptAmount) <= 0}
+                disabled={loading || !connected || balanceLoading || !aptAmount || parseFloat(aptAmount) <= 0 || aptBalance === 0}
               >
-                {loading ? 'Processing Transaction...' : connected ? 'Buy ACT Tokens' : 'Connect Wallet First'}
+                {loading ? 'Processing Transaction...' : 
+                 balanceLoading ? 'Loading Balance...' :
+                 !connected ? 'Connect Wallet First' :
+                 aptBalance === 0 ? '⚠️ Get APT from Faucet First' :
+                 'Buy ACT Tokens'}
               </Button>
             </div>
 

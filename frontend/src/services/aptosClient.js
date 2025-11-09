@@ -29,6 +29,43 @@ const config = new AptosConfig({
 export const aptosClient = new Aptos(config);
 
 /**
+ * Log network configuration details for debugging
+ */
+export const logNetworkConfig = () => {
+  console.log('═══════════════════════════════════════════════════════');
+  console.log('🌐 APTOS NETWORK CONFIGURATION');
+  console.log('═══════════════════════════════════════════════════════');
+  console.log('Network:', APTOS_NETWORK);
+  console.log('RPC URL:', APTOS_NODE_URL);
+  console.log('Network Enum:', APTOS_NETWORK === 'mainnet' ? 'MAINNET' : 'TESTNET');
+  console.log('Chain ID (Testnet):', 2);
+  console.log('Chain ID (Mainnet):', 1);
+  console.log('───────────────────────────────────────────────────────');
+  console.log('📦 CONTRACT ADDRESSES');
+  console.log('───────────────────────────────────────────────────────');
+  console.log('ACT Token:', CONTRACT_ADDRESSES.ACT_TOKEN);
+  console.log('DAO Module:', CONTRACT_ADDRESSES.DAO_MODULE);
+  console.log('Treasury:', CONTRACT_ADDRESSES.TREASURY_MODULE);
+  console.log('───────────────────────────────────────────────────────');
+  console.log('🔗 EXPLORER LINKS');
+  console.log('───────────────────────────────────────────────────────');
+  console.log('Contract Explorer:', `https://explorer.aptoslabs.com/account/${CONTRACT_ADDRESSES.ACT_TOKEN}?network=${APTOS_NETWORK}`);
+  console.log('Testnet Faucet:', 'https://faucet.testnet.aptoslabs.com/');
+  console.log('═══════════════════════════════════════════════════════');
+  
+  return {
+    network: APTOS_NETWORK,
+    rpcUrl: APTOS_NODE_URL,
+    chainId: APTOS_NETWORK === 'mainnet' ? 1 : 2,
+    contracts: CONTRACT_ADDRESSES,
+  };
+};
+
+// Auto-log on import
+console.log('[aptosClient] Initializing Aptos client...');
+logNetworkConfig();
+
+/**
  * Get account information
  * @param {string} address - Account address
  * @returns {Promise<Object>} Account info
@@ -45,24 +82,41 @@ export const getAccountInfo = async (address) => {
 
 /**
  * Get account APT balance
+ * 
+ * UPDATED: Uses modern SDK method that handles BOTH legacy Coin standard
+ * and new Fungible Asset (FA) standard. APT migrated to FA on June 30, 2025.
+ * 
  * @param {string} address - Account address
  * @returns {Promise<number>} Balance in APT (converted from octas)
  */
 export const getAPTBalance = async (address) => {
   try {
-    const resources = await aptosClient.getAccountResources({ accountAddress: address });
-    const accountResource = resources.find((r) => r.type === '0x1::coin::CoinStore<0x1::aptos_coin::AptosCoin>');
+    console.log('[getAPTBalance] 🔍 Fetching APT balance for:', address);
     
-    if (!accountResource) {
+    // Use the modern SDK method that automatically handles FA migration
+    // This method checks BOTH CoinStore (legacy) and FungibleStore (FA) 
+    const balanceInOctas = await aptosClient.getAccountAPTAmount({ 
+      accountAddress: address 
+    });
+    
+    console.log('[getAPTBalance] ✅ Raw balance (octas):', balanceInOctas);
+    
+    // Convert from octas to APT (1 APT = 100,000,000 octas)
+    const aptBalance = parseInt(balanceInOctas) / 100000000;
+    console.log('[getAPTBalance] 💰 APT balance:', aptBalance);
+    
+    return aptBalance;
+  } catch (error) {
+    console.error('[getAPTBalance] ❌ Error fetching APT balance:', error);
+    console.error('[getAPTBalance] Error details:', error.message);
+    
+    // If the account doesn't exist or has no APT, return 0
+    if (error.message?.includes('not found') || error.message?.includes('Resource not found')) {
+      console.warn('[getAPTBalance] ⚠️ Account has no APT balance or does not exist');
       return 0;
     }
     
-    const balance = accountResource.data.coin.value;
-    // Convert from octas to APT (1 APT = 100,000,000 octas)
-    return parseInt(balance) / 100000000;
-  } catch (error) {
-    console.error('Error fetching APT balance:', error);
-    return 0;
+    throw error; // Re-throw unexpected errors
   }
 };
 
